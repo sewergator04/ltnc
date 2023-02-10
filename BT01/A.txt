@@ -1,2 +1,30 @@
-changes to my homework
-another change
+1. Lệnh trả về giá trị boolean (true, false). Lệnh không có lỗi
+
+2. Đoạn chương trình có kết quả là 0
+
+3. lệnh long y = x*x sẽ xử lý x*x dưới dạng int trước rồi đổi sang kiểu dữ liệu long để gán cho y. 
+Do 2^32 vượt ngoài giới hạn int nên kết quả của y không thể in ra đúng.
+
+4. Biểu thức có giá trị false.
+
+5.Chương trình báo lỗi -1073741676 (0xC0000094)
+
+6.error: invalid operands of types 'int' and 'const char [6]' to binary 'operator*'|.
+Nếu chuyển dòng khai báo x ra ngoài, chương trình vẫn hoạt động bình thường.
+
+7.
+0
+0.75
+0.75
+0.75
+
+8. Khai báo hai biến trùng tên sẽ sinh ra lỗi mâu thuẫn giữa 2 biến.
+
+9. Khi ở bên trong khối lệnh con, định danh arg1 chỉ tới biến char.
+
+10.Khi ra khỏi khối lệnh con, định danh arg chỉ tới biến int.
+
+11.Lệnh này có biểu thức 5/9 ở trong ngoặc, được thực hiện theo kiểu int.
+Biểu thức trong ngoặc được thực hiện trước và trả về kết quả bằng 0.
+
+12. Đoạn code in ra từ Here
