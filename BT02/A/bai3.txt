@@ -1,0 +1,3 @@
+Các vòng lặp của bài 1 sẽ hoạt động như bình thường.
+
+Các vòng lặp của bài 2 sẽ có sự cố nếu giá trị n <= 0
