@@ -1,0 +1,49 @@
+# depslib dependency file v1.0
+1678551414 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\commonfunctions.cpp
+	"commonfunctions.hpp"
+
+1678560524 c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\commonfunctions.hpp
+	<bits/stdc++.h>
+	<SDL2/SDL.h>
+	<SDL2/SDL_image.h>
+	<SDL2/SDL_mixer.h>
+	<SDL2/SDL_ttf.h>
+
+1678559200 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\main.cpp
+	"commonfunctions.hpp"
+	"baseobject.hpp"
+	"mainobject.hpp"
+	"bullets.hpp"
+	"playerlives.hpp"
+
+1677784888 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\baseobject.cpp
+	"baseobject.hpp"
+
+1677784888 c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\baseobject.hpp
+	"commonfunctions.hpp"
+
+1677513580 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\maps.cpp
+	"maps.hpp"
+
+1677512835 c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\maps.hpp
+	"commonfunctions.hpp"
+	"baseobject.hpp"
+
+1678551499 c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\mainobject.hpp
+	"baseobject.hpp"
+
+1678547951 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\mainobject.cpp
+	"mainobject.hpp"
+
+1678551520 c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\bullets.hpp
+	"baseobject.hpp"
+
+1678417970 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\bullets.cpp
+	"bullets.hpp"
+
+1678554517 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\playerlives.cpp
+	"playerlives.hpp"
+
+1678554517 c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\playerlives.hpp
+	"baseobject.hpp"
+

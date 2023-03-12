@@ -1,0 +1,24 @@
+3. Vòng lặp chạy 1000 lần do đây không phải hàm tham chiếu
+4. Chương trình cho kết quả 1717
+5.Hàm thứ 2 là hàm đúng
+6.Hàm thứ nhất sẽ in ra màn hình f(int, double), hàm thứ 2 in ra f(double, int)
+7.D
+8.A
+9.B
+10.B
+11.C
+12.B
+13.D
+14.D
+15.B
+16.B
+17.A
+18.A
+19.B
+20.B D
+21.B
+22.A
+23.C
+24.A
+25.A
+26.D
