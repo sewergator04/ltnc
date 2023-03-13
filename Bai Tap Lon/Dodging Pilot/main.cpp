@@ -6,6 +6,7 @@
 
 BaseObject background;
 Mix_Music* backgroundmusic = NULL;
+Mix_Chunk* damagemusic = NULL;
 MainObject plane;
 Bullet* straightbuls = new Bullet[BulletsNum];
 PlayerLives hearts;
@@ -32,7 +33,8 @@ bool InitData()
         }else
         {
             backgroundmusic = Mix_LoadMUS("maxwell.mp3");
-            if(backgroundmusic == NULL)
+            damagemusic = Mix_LoadWAV("PlaneHit.wav");
+            if(backgroundmusic == NULL && damagemusic == NULL)
             {
                 success = false;
             }
@@ -88,6 +90,7 @@ void Close()
     background.Free();
     plane.Free();
     Mix_FreeMusic(backgroundmusic);
+    Mix_FreeChunk(damagemusic);
     Mix_CloseAudio();
     for(int i = 0; i < BulletsNum; i++)
     {
@@ -173,7 +176,7 @@ int main(int agrc, char* argv[])
             bool isCol = SDLCommonFunc::CheckCollision(plane.GetRect(), straightbul->GetRect());
             if(isCol)
             {
-
+                Mix_PlayChannel(-1,damagemusic,0);
                 deaths++;
                 if(deaths <= 2)
                 {
