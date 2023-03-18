@@ -1,0 +1,13 @@
+1.Không có tình huống nào mà chỉ vòng lặp có thể làm được nếu bỏ qua bộ nhớ và thời gian chạy
+vì đệ quy có thể mô phỏng mọi vòng lặp dù tốn nhiều bộ nhớ
+2.Không vì đệ quy về cơ bản là 1 cách dùng vòng lặp
+3. Tùy vào giới hạn bộ nhớ, thời gian và tính dễ hiểu sẽ dùng hoặc vòng lặp hoặc đệ quy
+4. Cần đề phòng vấn đề tràn bộ nhớ, tính toán quá nhiều gây mất thời gian
+5.Chương trình sẽ in ra: 6 4 2 2 1 1 4 3 1 1 3 6
+6. Hàm chưa khởi tạo base case => Đệ quy vô cùng
+7. mystery(2,25) = 50 , mystery(3,11) = 33
+Hàm này tính a*b
+
+Sau khi sửa code:
+mystery(2,25) = 65795, mystery(3,11) = 6574
+Hàm này tính a^b
