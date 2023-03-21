@@ -42,6 +42,8 @@
 		<Unit filename="mainobject.hpp" />
 		<Unit filename="playerlives.cpp" />
 		<Unit filename="playerlives.hpp" />
+		<Unit filename="texts.cpp" />
+		<Unit filename="texts.hpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

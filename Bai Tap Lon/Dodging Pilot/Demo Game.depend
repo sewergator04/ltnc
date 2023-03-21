@@ -9,12 +9,13 @@
 	<SDL2/SDL_mixer.h>
 	<SDL2/SDL_ttf.h>
 
-1678559200 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\main.cpp
+1679403739 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\main.cpp
 	"commonfunctions.hpp"
 	"baseobject.hpp"
 	"mainobject.hpp"
 	"bullets.hpp"
 	"playerlives.hpp"
+	"texts.hpp"
 
 1677784888 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\baseobject.cpp
 	"baseobject.hpp"
@@ -46,4 +47,10 @@
 
 1678554517 c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\playerlives.hpp
 	"baseobject.hpp"
+
+1679404347 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\texts.cpp
+	"texts.hpp"
+
+1679395240 c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\texts.hpp
+	"commonfunctions.hpp"
 

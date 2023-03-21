@@ -5,3 +5,6 @@ v 1.0:
 
 v 1.1:
 -Thêm hiệu ứng âm thanh khi bị trúng đạn
+
+v 1.2:
+-Thời gian đếm ngược đã hiện ở trên màn hình game.

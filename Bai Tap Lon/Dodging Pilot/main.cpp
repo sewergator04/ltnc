@@ -3,6 +3,7 @@
 #include "mainobject.hpp"
 #include "bullets.hpp"
 #include "playerlives.hpp"
+#include "texts.hpp"
 
 BaseObject background;
 Mix_Music* backgroundmusic = NULL;
@@ -10,6 +11,8 @@ Mix_Chunk* damagemusic = NULL;
 MainObject plane;
 Bullet* straightbuls = new Bullet[BulletsNum];
 PlayerLives hearts;
+TTF_Font* font_cooldown = NULL;
+Texts cooldowntimer;
 int invincible = 0;
 
 bool InitData()
@@ -32,9 +35,20 @@ bool InitData()
             success = false;
         }else
         {
-            backgroundmusic = Mix_LoadMUS("maxwell.mp3");
-            damagemusic = Mix_LoadWAV("PlaneHit.wav");
+            backgroundmusic = Mix_LoadMUS("soundtrack//maxwell.mp3");
+            damagemusic = Mix_LoadWAV("soundtrack//PlaneHit.wav");
             if(backgroundmusic == NULL && damagemusic == NULL)
+            {
+                success = false;
+            }
+        }
+        if(TTF_Init() == -1)
+        {
+            success = false;
+        }else
+        {
+            font_cooldown = TTF_OpenFont("font//DTM-Sans.ttf",80);
+            if(font_cooldown == NULL)
             {
                 success = false;
             }
@@ -92,6 +106,7 @@ void Close()
     Mix_FreeMusic(backgroundmusic);
     Mix_FreeChunk(damagemusic);
     Mix_CloseAudio();
+    cooldowntimer.FreeTex();
     for(int i = 0; i < BulletsNum; i++)
     {
         Bullet* freebul = (straightbuls+i);
@@ -135,6 +150,7 @@ int main(int agrc, char* argv[])
     unsigned int deaths = 0;
     bool is_quit = false;
     Mix_PlayMusic(backgroundmusic, -1);
+    cooldowntimer.SetColor(Texts::WHITE);
 
     while(!is_quit)
     {
@@ -162,13 +178,18 @@ int main(int agrc, char* argv[])
             {
                 if(invincible == 9999)
                 {
-                    std::cout << 3 << std::endl;
+                    cooldowntimer.SetText("3");
+                    cooldowntimer.LoadFromRenderedText(font_cooldown,renderer);
                 }else if(invincible == 6666)
                 {
-                    std::cout << 2 << std::endl;
+                    cooldowntimer.SetText("2");
+                    cooldowntimer.LoadFromRenderedText(font_cooldown,renderer);
+                    //cooldowntimer.RenderText(renderer,275,0);
                 }else if(invincible == 3333)
                 {
-                    std::cout << 1 << std::endl;
+                    cooldowntimer.SetText("1");
+                    cooldowntimer.LoadFromRenderedText(font_cooldown,renderer);
+                    //cooldowntimer.RenderText(renderer,275,0);
                 }
                 invincible--;
                 continue;
@@ -191,6 +212,12 @@ int main(int agrc, char* argv[])
                 }
             }
         }
+        if(invincible == 0)
+        {
+            cooldowntimer.SetText("0");
+            cooldowntimer.LoadFromRenderedText(font_cooldown,renderer);
+        }
+        cooldowntimer.RenderText(renderer,275,0);
         SDL_RenderPresent(renderer);
         SDL_Delay(1);
     }
