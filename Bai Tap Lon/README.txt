@@ -8,3 +8,5 @@ v 1.1:
 
 v 1.2:
 -Thời gian đếm ngược đã hiện ở trên màn hình game.
+- Đã thêm đếm thời gian cho 1 ván
+

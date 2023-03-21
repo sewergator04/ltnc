@@ -12,7 +12,8 @@ MainObject plane;
 Bullet* straightbuls = new Bullet[BulletsNum];
 PlayerLives hearts;
 TTF_Font* font_cooldown = NULL;
-Texts cooldowntimer;
+TTF_Font* font_survivaltime = NULL;
+Texts cooldowntimer,survivetime;
 int invincible = 0;
 
 bool InitData()
@@ -48,6 +49,7 @@ bool InitData()
         }else
         {
             font_cooldown = TTF_OpenFont("font//DTM-Sans.ttf",80);
+            font_survivaltime = TTF_OpenFont("font//DTM-Sans.ttf",20);
             if(font_cooldown == NULL)
             {
                 success = false;
@@ -56,7 +58,7 @@ bool InitData()
     }
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
 
-    window = SDL_CreateWindow("SDL2 Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenWidth, ScreenHeight, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Dodging Pilot v1.2", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenWidth, ScreenHeight, SDL_WINDOW_SHOWN);
     if(window == NULL)
     {
         success = false;
@@ -101,21 +103,22 @@ bool loadPlane()
 
 void Close()
 {
+    SDL_DestroyWindow(window);
+    window = NULL;
+    SDL_DestroyRenderer(renderer);
+    renderer = NULL;
     background.Free();
     plane.Free();
     Mix_FreeMusic(backgroundmusic);
     Mix_FreeChunk(damagemusic);
     Mix_CloseAudio();
     cooldowntimer.FreeTex();
+    survivetime.FreeTex();
     for(int i = 0; i < BulletsNum; i++)
     {
         Bullet* freebul = (straightbuls+i);
         freebul->Free();
     }
-    SDL_DestroyRenderer(renderer);
-    renderer = NULL;
-    SDL_DestroyWindow(window);
-    window = NULL;
     IMG_Quit();
     SDL_Quit();
 }
@@ -152,6 +155,12 @@ int main(int agrc, char* argv[])
     Mix_PlayMusic(backgroundmusic, -1);
     cooldowntimer.SetColor(Texts::WHITE);
 
+    //Survive Timer
+    Uint32 startTime = SDL_GetTicks();
+    Uint32 elapsedTime = 0;
+    Uint32 lastUpdateTime = startTime;
+
+
     while(!is_quit)
     {
         while(SDL_PollEvent(&e) != 0)
@@ -169,6 +178,15 @@ int main(int agrc, char* argv[])
         hearts.LiveRender(renderer);
         plane.HandleMove();
         plane.Render(renderer,NULL);
+        Uint32 currentTime = SDL_GetTicks();
+        Uint32 deltaTime = currentTime - lastUpdateTime;
+        lastUpdateTime = currentTime;
+        elapsedTime += deltaTime;
+        Uint32 finalTime = elapsedTime/1000;
+        std::string SurviveTimeStr = "Survive Time: " + std::to_string(finalTime);
+        survivetime.SetText(SurviveTimeStr);
+        survivetime.LoadFromRenderedText(font_survivaltime,renderer);
+
         for(int j = 0; j < BulletsNum; j++)
         {
             Bullet* straightbul = (straightbuls+j);
@@ -184,12 +202,10 @@ int main(int agrc, char* argv[])
                 {
                     cooldowntimer.SetText("2");
                     cooldowntimer.LoadFromRenderedText(font_cooldown,renderer);
-                    //cooldowntimer.RenderText(renderer,275,0);
                 }else if(invincible == 3333)
                 {
                     cooldowntimer.SetText("1");
                     cooldowntimer.LoadFromRenderedText(font_cooldown,renderer);
-                    //cooldowntimer.RenderText(renderer,275,0);
                 }
                 invincible--;
                 continue;
@@ -217,6 +233,7 @@ int main(int agrc, char* argv[])
             cooldowntimer.SetText("0");
             cooldowntimer.LoadFromRenderedText(font_cooldown,renderer);
         }
+        survivetime.RenderText(renderer,230,80);
         cooldowntimer.RenderText(renderer,275,0);
         SDL_RenderPresent(renderer);
         SDL_Delay(1);
