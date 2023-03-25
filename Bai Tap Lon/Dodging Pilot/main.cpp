@@ -16,6 +16,11 @@ TTF_Font* font_survivaltime = NULL;
 Texts cooldowntimer,survivetime;
 int invincible = 0;
 
+SDL_Window* window = NULL;
+SDL_Renderer* renderer = NULL;
+SDL_Event e;
+
+
 bool InitData()
 {
     bool success = true;
@@ -58,7 +63,7 @@ bool InitData()
     }
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
 
-    window = SDL_CreateWindow("Dodging Pilot v1.2", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenWidth, ScreenHeight, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Dodging Pilot v2.0", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenWidth, ScreenHeight, SDL_WINDOW_SHOWN);
     if(window == NULL)
     {
         success = false;
@@ -103,10 +108,6 @@ bool loadPlane()
 
 void Close()
 {
-    SDL_DestroyWindow(window);
-    window = NULL;
-    SDL_DestroyRenderer(renderer);
-    renderer = NULL;
     background.Free();
     plane.Free();
     Mix_FreeMusic(backgroundmusic);
@@ -119,6 +120,11 @@ void Close()
         Bullet* freebul = (straightbuls+i);
         freebul->Free();
     }
+    delete []straightbuls;
+    SDL_DestroyWindow(window);
+    window = NULL;
+    SDL_DestroyRenderer(renderer);
+    renderer = NULL;
     IMG_Quit();
     SDL_Quit();
 }
@@ -137,6 +143,28 @@ int main(int agrc, char* argv[])
     {
         return -1;
     }
+    //Variables
+    Uint32 startTime;
+    Uint32 elapsedTime = 0;
+    Uint32 lastUpdateTime = 0;
+    Uint32 savedTime;
+    unsigned int deaths = 0;
+    bool is_quit = false;
+    bool start_counting = false;
+
+    Mix_PlayMusic(backgroundmusic, -1);
+    GameMenu:
+    int GUI = SDLCommonFunc::ShowMenu(renderer,font_survivaltime);
+    if(GUI == 1)
+    {
+        is_quit = true;
+    }else if(GUI == 0)
+    {
+        startTime = SDL_GetTicks();
+        start_counting = true;
+    }
+
+    NewRound:
     for(int i = 0; i < BulletsNum; i++)
     {
         Bullet* straightbul = (straightbuls+i);
@@ -150,15 +178,8 @@ int main(int agrc, char* argv[])
         straightbul->set_y_val(1);
     }
     hearts.Init(renderer);
-    unsigned int deaths = 0;
-    bool is_quit = false;
-    Mix_PlayMusic(backgroundmusic, -1);
     cooldowntimer.SetColor(Texts::WHITE);
-
-    //Survive Timer
-    Uint32 startTime = SDL_GetTicks();
-    Uint32 elapsedTime = 0;
-    Uint32 lastUpdateTime = startTime;
+    plane.SetRect(275,468);
 
 
     while(!is_quit)
@@ -172,21 +193,24 @@ int main(int agrc, char* argv[])
             }
             plane.HandleInputAction(e);
         }
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
         SDL_RenderClear(renderer);
         background.Render(renderer, NULL);
         hearts.LiveRender(renderer);
         plane.HandleMove();
         plane.Render(renderer,NULL);
-        Uint32 currentTime = SDL_GetTicks();
-        Uint32 deltaTime = currentTime - lastUpdateTime;
-        lastUpdateTime = currentTime;
-        elapsedTime += deltaTime;
-        Uint32 finalTime = elapsedTime/1000;
-        std::string SurviveTimeStr = "Survive Time: " + std::to_string(finalTime);
-        survivetime.SetText(SurviveTimeStr);
-        survivetime.LoadFromRenderedText(font_survivaltime,renderer);
-
+        if(start_counting)
+        {
+            Uint32 currentTime = SDL_GetTicks() - startTime;
+            Uint32 deltaTime = currentTime - lastUpdateTime;
+            lastUpdateTime = currentTime;
+            elapsedTime += deltaTime;
+            Uint32 finalTime = elapsedTime/1000;
+            savedTime = finalTime;
+            std::string SurviveTimeStr = "Survive Time: " + std::to_string(finalTime);
+            survivetime.SetText(SurviveTimeStr);
+            survivetime.LoadFromRenderedText(font_survivaltime,renderer);
+        }
         for(int j = 0; j < BulletsNum; j++)
         {
             Bullet* straightbul = (straightbuls+j);
@@ -222,9 +246,27 @@ int main(int agrc, char* argv[])
                     invincible = 9999;
                 }else
                 {
-                    std::cout << "All lives lost! - Game Over" << std::endl;
-                    Close();
-                    return 0;
+                    start_counting = false;
+                    SDL_RenderClear(renderer);
+                    int GameOver = SDLCommonFunc::ShowGameOverScreen(renderer,font_survivaltime,savedTime);
+                    if(GameOver == 2)
+                    {
+                        is_quit = true;
+                        Close();
+                        return 0;
+                    }else if(GameOver == 1)
+                    {
+                        SDL_RenderClear(renderer);
+                        deaths = 0;
+                        hearts.Init(renderer);
+                        goto GameMenu;
+                    }else
+                    {
+                        deaths = 0;
+                        startTime = SDL_GetTicks();
+                        start_counting = true;
+                        goto NewRound;
+                    }
                 }
             }
         }

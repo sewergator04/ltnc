@@ -2,7 +2,7 @@
 MainObject::MainObject()
 {
     rect_.x = 275;
-    rect_.y = 936/2;
+    rect_.y = 468;
     rect_.w = WIDTH_MAIN_OBJECT;
     rect_.h = HEIGHT_MAIN_OBJECT;
     x_val = 0;

@@ -1,15 +1,15 @@
 # depslib dependency file v1.0
-1678551414 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\commonfunctions.cpp
-	"commonfunctions.hpp"
+1679759252 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\commonfunctions.cpp
+	"texts.hpp"
 
-1678560524 c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\commonfunctions.hpp
+1679759284 c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\commonfunctions.hpp
 	<bits/stdc++.h>
 	<SDL2/SDL.h>
 	<SDL2/SDL_image.h>
 	<SDL2/SDL_mixer.h>
 	<SDL2/SDL_ttf.h>
 
-1679403739 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\main.cpp
+1679682965 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\main.cpp
 	"commonfunctions.hpp"
 	"baseobject.hpp"
 	"mainobject.hpp"
@@ -33,7 +33,7 @@
 1678551499 c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\mainobject.hpp
 	"baseobject.hpp"
 
-1678547951 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\mainobject.cpp
+1679760569 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\mainobject.cpp
 	"mainobject.hpp"
 
 1678551520 c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\bullets.hpp
@@ -60,7 +60,7 @@
 1677784888 c:\users\admin\documents\github\ltnc\bai tap lon\dodging pilot\baseobject.hpp
 	"commonfunctions.hpp"
 
-1678560524 c:\users\admin\documents\github\ltnc\bai tap lon\dodging pilot\commonfunctions.hpp
+1679759284 c:\users\admin\documents\github\ltnc\bai tap lon\dodging pilot\commonfunctions.hpp
 	<bits/stdc++.h>
 	<SDL2/SDL.h>
 	<SDL2/SDL_image.h>
@@ -73,10 +73,13 @@
 1678551520 c:\users\admin\documents\github\ltnc\bai tap lon\dodging pilot\bullets.hpp
 	"baseobject.hpp"
 
-1678551414 source:c:\users\admin\documents\github\ltnc\bai tap lon\dodging pilot\commonfunctions.cpp
+1679759252 source:c:\users\admin\documents\github\ltnc\bai tap lon\dodging pilot\commonfunctions.cpp
+	"texts.hpp"
+
+1679395240 c:\users\admin\documents\github\ltnc\bai tap lon\dodging pilot\texts.hpp
 	"commonfunctions.hpp"
 
-1679412309 source:c:\users\admin\documents\github\ltnc\bai tap lon\dodging pilot\main.cpp
+1679762232 source:c:\users\admin\documents\github\ltnc\bai tap lon\dodging pilot\main.cpp
 	"commonfunctions.hpp"
 	"baseobject.hpp"
 	"mainobject.hpp"
@@ -90,10 +93,7 @@
 1678554517 c:\users\admin\documents\github\ltnc\bai tap lon\dodging pilot\playerlives.hpp
 	"baseobject.hpp"
 
-1679395240 c:\users\admin\documents\github\ltnc\bai tap lon\dodging pilot\texts.hpp
-	"commonfunctions.hpp"
-
-1678547951 source:c:\users\admin\documents\github\ltnc\bai tap lon\dodging pilot\mainobject.cpp
+1679760569 source:c:\users\admin\documents\github\ltnc\bai tap lon\dodging pilot\mainobject.cpp
 	"mainobject.hpp"
 
 1678554517 source:c:\users\admin\documents\github\ltnc\bai tap lon\dodging pilot\playerlives.cpp

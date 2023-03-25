@@ -7,9 +7,6 @@
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_ttf.h>
 
-static SDL_Window* window = NULL;
-static SDL_Renderer* renderer = NULL;
-static SDL_Event e;
 
 const int ScreenWidth = 600;
 const int ScreenHeight = 1000;
@@ -19,6 +16,9 @@ const int BulletsNum = 8;
 namespace SDLCommonFunc
 {
     bool CheckCollision(const SDL_Rect& object1, const SDL_Rect& object2);
+    int ShowMenu(SDL_Renderer* des, TTF_Font* menufont);
+    int ShowGameOverScreen(SDL_Renderer* des, TTF_Font* gameoverfont, Uint32 &playerrecord);
+    bool CheckFocusWithRect(int x, int y, SDL_Rect& buttonrect);
 }
 
 

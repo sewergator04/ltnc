@@ -10,3 +10,5 @@ v 1.2:
 -Thời gian đếm ngược đã hiện ở trên màn hình game.
 - Đã thêm đếm thời gian cho 1 ván
 
+v 2.0:
+- Thêm menu game, màn hình game over
