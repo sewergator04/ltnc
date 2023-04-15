@@ -37,6 +37,8 @@
 		<Unit filename="bullets.hpp" />
 		<Unit filename="commonfunctions.cpp" />
 		<Unit filename="commonfunctions.hpp" />
+		<Unit filename="highscoresaver.cpp" />
+		<Unit filename="highscoresaver.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="mainobject.cpp" />
 		<Unit filename="mainobject.hpp" />

@@ -12,3 +12,6 @@ v 1.2:
 
 v 2.0:
 - Thêm menu game, màn hình game over
+
+v 2.1:
+-Thêm chức năng save game

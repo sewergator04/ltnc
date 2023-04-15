@@ -4,6 +4,7 @@
 #include "bullets.hpp"
 #include "playerlives.hpp"
 #include "texts.hpp"
+#include "highscoresaver.hpp"
 
 BaseObject background;
 Mix_Music* backgroundmusic = NULL;
@@ -14,6 +15,7 @@ PlayerLives hearts;
 TTF_Font* font_cooldown = NULL;
 TTF_Font* font_survivaltime = NULL;
 Texts cooldowntimer,survivetime;
+HighScore highscoresystem;
 int invincible = 0;
 
 SDL_Window* window = NULL;
@@ -63,7 +65,7 @@ bool InitData()
     }
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
 
-    window = SDL_CreateWindow("Dodging Pilot v2.0", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenWidth, ScreenHeight, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Dodging Pilot v2.1", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, ScreenWidth, ScreenHeight, SDL_WINDOW_SHOWN);
     if(window == NULL)
     {
         success = false;
@@ -151,9 +153,17 @@ int main(int agrc, char* argv[])
     unsigned int deaths = 0;
     bool is_quit = false;
     bool start_counting = false;
-
+    Uint32 finalTime;
     Mix_PlayMusic(backgroundmusic, -1);
+
     GameMenu:
+    Texts displayhighonmenu;
+    highscoresystem.ReadHighScore();
+    std::string texttodisplay = "High Score: " + std::to_string(highscoresystem.GetHighScore());
+    displayhighonmenu.SetText(texttodisplay);
+    displayhighonmenu.SetColor(Texts::WHITE);
+    displayhighonmenu.LoadFromRenderedText(font_survivaltime,renderer);
+    displayhighonmenu.RenderText(renderer,200,350,NULL,NULL,SDL_FLIP_NONE);
     int GUI = SDLCommonFunc::ShowMenu(renderer,font_survivaltime);
     if(GUI == 1)
     {
@@ -165,6 +175,7 @@ int main(int agrc, char* argv[])
     }
 
     NewRound:
+    highscoresystem.ReadHighScore();
     for(int i = 0; i < BulletsNum; i++)
     {
         Bullet* straightbul = (straightbuls+i);
@@ -205,7 +216,7 @@ int main(int agrc, char* argv[])
             Uint32 deltaTime = currentTime - lastUpdateTime;
             lastUpdateTime = currentTime;
             elapsedTime += deltaTime;
-            Uint32 finalTime = elapsedTime/1000;
+            finalTime = elapsedTime/1000;
             savedTime = finalTime;
             std::string SurviveTimeStr = "Survive Time: " + std::to_string(finalTime);
             survivetime.SetText(SurviveTimeStr);
@@ -248,6 +259,15 @@ int main(int agrc, char* argv[])
                 {
                     start_counting = false;
                     SDL_RenderClear(renderer);
+                    if(highscoresystem.GetHighScore() < finalTime)
+                    {
+                        highscoresystem.SaveNewHighScore(finalTime);
+                        Texts displaynotif;
+                        displaynotif.SetText("New High Score!");
+                        displaynotif.SetColor(Texts::WHITE);
+                        displaynotif.LoadFromRenderedText(font_survivaltime,renderer);
+                        displaynotif.RenderText(renderer,200,250,NULL,NULL,SDL_FLIP_NONE);
+                    }
                     int GameOver = SDLCommonFunc::ShowGameOverScreen(renderer,font_survivaltime,savedTime);
                     if(GameOver == 2)
                     {
