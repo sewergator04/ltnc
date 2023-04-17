@@ -12,7 +12,7 @@ const int ScreenWidth = 600;
 const int ScreenHeight = 1000;
 const int ScreenBPP = 32;
 const int BulletsNum = 8;
-const int FPS = 60;
+const int FPS = 400; //Chinh toc do cua game tai day
 const int FrameTime = 1000/FPS;
 namespace SDLCommonFunc
 {

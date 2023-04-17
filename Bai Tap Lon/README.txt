@@ -1,7 +1,7 @@
 v 1.0:
 -Bao gồm các chức năng chính của game
 -Chưa có menu game và sẽ tự tắt khi mất hết mạng
--Mỗi lần bị trúng đạn sẽ nhận 3s "bất tử", thời gian đếm ngược in ra ở console
+-thời gian đếm ngược của "bất tử" in ra ở console
 
 v 1.1:
 -Thêm hiệu ứng âm thanh khi bị trúng đạn
@@ -14,4 +14,6 @@ v 2.0:
 - Thêm menu game, màn hình game over
 
 v 2.1:
--Thêm chức năng save game
+-Thêm tính năng lưu high score
+-Thêm tính năng điều chỉnh FPS 
+(chỉnh biến int FPS trong file commonfunctions.hpp, tăng giá trị nếu game chạy quá chậm và giảm nếu game chạy quá nhanh)

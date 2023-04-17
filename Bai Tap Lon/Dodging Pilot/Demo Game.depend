@@ -2,14 +2,14 @@
 1679759252 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\commonfunctions.cpp
 	"texts.hpp"
 
-1679759284 c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\commonfunctions.hpp
+1681754720 c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\commonfunctions.hpp
 	<bits/stdc++.h>
 	<SDL2/SDL.h>
 	<SDL2/SDL_image.h>
 	<SDL2/SDL_mixer.h>
 	<SDL2/SDL_ttf.h>
 
-1681583462 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\main.cpp
+1681754348 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\main.cpp
 	"commonfunctions.hpp"
 	"baseobject.hpp"
 	"mainobject.hpp"

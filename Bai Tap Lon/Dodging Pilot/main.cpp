@@ -16,7 +16,6 @@ TTF_Font* font_cooldown = NULL;
 TTF_Font* font_survivaltime = NULL;
 Texts cooldowntimer,survivetime;
 HighScore highscoresystem;
-int invincible = 0;
 
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
@@ -153,7 +152,12 @@ int main(int agrc, char* argv[])
     unsigned int deaths = 0;
     bool is_quit = false;
     bool start_counting = false;
+    bool startcooldown = false;
     Uint32 finalTime;
+    int cooldownremains;
+    Uint32 markedcooldown;
+    int invincible = 0;
+
     Mix_PlayMusic(backgroundmusic, -1);
 
     GameMenu:
@@ -195,6 +199,7 @@ int main(int agrc, char* argv[])
 
     while(!is_quit)
     {
+        Uint32 FPSstarttime = SDL_GetTicks();
         while(SDL_PollEvent(&e) != 0)
         {
             if(e.type == SDL_QUIT)
@@ -222,27 +227,31 @@ int main(int agrc, char* argv[])
             survivetime.SetText(SurviveTimeStr);
             survivetime.LoadFromRenderedText(font_survivaltime,renderer);
         }
+        if(startcooldown)
+        {
+            Uint32 currentTimeforcooldown = SDL_GetTicks();
+            cooldownremains = invincible - (currentTimeforcooldown-markedcooldown);
+        }
         for(int j = 0; j < BulletsNum; j++)
         {
             Bullet* straightbul = (straightbuls+j);
             straightbul->HandleMove();
             straightbul->Render(renderer,NULL);
-            if(invincible > 0)
+            if(cooldownremains > 0)
             {
-                if(invincible == 9999)
+                if(cooldownremains > 2000 && cooldownremains <= 3000)
                 {
                     cooldowntimer.SetText("3");
                     cooldowntimer.LoadFromRenderedText(font_cooldown,renderer);
-                }else if(invincible == 6666)
+                }else if(cooldownremains > 1000 && cooldownremains <= 2000)
                 {
                     cooldowntimer.SetText("2");
                     cooldowntimer.LoadFromRenderedText(font_cooldown,renderer);
-                }else if(invincible == 3333)
+                }else if(cooldownremains <= 1000)
                 {
                     cooldowntimer.SetText("1");
                     cooldowntimer.LoadFromRenderedText(font_cooldown,renderer);
                 }
-                invincible--;
                 continue;
             }
             bool isCol = SDLCommonFunc::CheckCollision(plane.GetRect(), straightbul->GetRect());
@@ -254,7 +263,9 @@ int main(int agrc, char* argv[])
                 {
                     hearts.Decrease();
                     hearts.LiveRender(renderer);
-                    invincible = 9999;
+                    invincible = 3000;
+                    markedcooldown = SDL_GetTicks();
+                    startcooldown = true;
                 }else
                 {
                     start_counting = false;
@@ -290,15 +301,14 @@ int main(int agrc, char* argv[])
                 }
             }
         }
-        if(invincible == 0)
-        {
-            cooldowntimer.SetText("0");
-            cooldowntimer.LoadFromRenderedText(font_cooldown,renderer);
-        }
         survivetime.RenderText(renderer,230,80);
         cooldowntimer.RenderText(renderer,275,0);
         SDL_RenderPresent(renderer);
-        SDL_Delay(1);
+        Uint32 frame_duration = SDL_GetTicks() - FPSstarttime;
+        if(frame_duration < FrameTime)
+        {
+            SDL_Delay(FrameTime - frame_duration);
+        }
     }
     Close();
     return 0;

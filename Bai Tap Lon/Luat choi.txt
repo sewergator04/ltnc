@@ -1,0 +1,4 @@
+-Nhấn tổ hợp phím mũi tên để di chuyển máy bay
+-Né các chướng ngại rơi xuống, trúng đạn sẽ giảm 1 mạng
+-Khi bị trúng đạn sẽ nhận 3 giây "bất tử", giúp người chơi di chuyển đến vùng an toàn
+-Mỗi màn chơi có 3 mạng, hết 3 mạng sẽ kết thúc trò chơi
