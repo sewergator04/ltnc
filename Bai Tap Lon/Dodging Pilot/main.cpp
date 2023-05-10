@@ -6,7 +6,7 @@
 #include "texts.hpp"
 #include "highscoresaver.hpp"
 
-BaseObject background;
+BaseObject background,menubackground,gameoverbackground;
 Mix_Music* backgroundmusic = NULL;
 Mix_Chunk* damagemusic = NULL;
 MainObject plane;
@@ -87,6 +87,16 @@ bool InitData()
     return success;
 }
 
+bool loadmenubackground()
+{
+    bool results = menubackground.LoadImg("assets//menubackground.jpg",renderer);
+    if(results == false)
+    {
+        return false;
+    }
+    return true;
+}
+
 bool loadbackground()
 {
     bool ret = background.LoadImg("assets//bluemoon.png",renderer);
@@ -107,9 +117,22 @@ bool loadPlane()
     return true;
 }
 
+
+bool loadgameoverbackground()
+{
+    bool results = gameoverbackground.LoadImg("assets//gameover.jpg",renderer);
+    if(results == false)
+    {
+        return false;
+    }
+    return true;
+}
+
 void Close()
 {
     background.Free();
+    menubackground.Free();
+    gameoverbackground.Free();
     plane.Free();
     Mix_FreeMusic(backgroundmusic);
     Mix_FreeChunk(damagemusic);
@@ -144,6 +167,14 @@ int main(int agrc, char* argv[])
     {
         return -1;
     }
+    if(loadmenubackground() == false)
+    {
+        return -1;
+    }
+    if(loadgameoverbackground() == false)
+    {
+        return -1;
+    }
     //Variables
     Uint32 startTime;
     Uint32 elapsedTime = 0;
@@ -161,13 +192,17 @@ int main(int agrc, char* argv[])
     Mix_PlayMusic(backgroundmusic, -1);
 
     GameMenu:
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    SDL_RenderClear(renderer);
+    menubackground.Render(renderer,NULL);
+    SDL_RenderPresent(renderer);
     Texts displayhighonmenu;
     highscoresystem.ReadHighScore();
     std::string texttodisplay = "High Score: " + std::to_string(highscoresystem.GetHighScore());
     displayhighonmenu.SetText(texttodisplay);
-    displayhighonmenu.SetColor(Texts::WHITE);
+    displayhighonmenu.SetColor(Texts::BLACK);
     displayhighonmenu.LoadFromRenderedText(font_survivaltime,renderer);
-    displayhighonmenu.RenderText(renderer,200,350,NULL,NULL,SDL_FLIP_NONE);
+    displayhighonmenu.RenderText(renderer,230,350,NULL,NULL,SDL_FLIP_NONE);
     int GUI = SDLCommonFunc::ShowMenu(renderer,font_survivaltime);
     if(GUI == 1)
     {
@@ -270,6 +305,8 @@ int main(int agrc, char* argv[])
                 {
                     start_counting = false;
                     SDL_RenderClear(renderer);
+                    gameoverbackground.Render(renderer,NULL);
+                    SDL_RenderPresent(renderer);
                     if(highscoresystem.GetHighScore() < finalTime)
                     {
                         highscoresystem.SaveNewHighScore(finalTime);

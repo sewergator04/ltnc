@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1679759252 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\commonfunctions.cpp
+1682248000 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\commonfunctions.cpp
 	"texts.hpp"
 
 1681754720 c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\commonfunctions.hpp
@@ -9,7 +9,7 @@
 	<SDL2/SDL_mixer.h>
 	<SDL2/SDL_ttf.h>
 
-1681754348 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\main.cpp
+1683699190 source:c:\users\admin\documents\lap trinh nang cao\bai tap lon\my game\demo game\main.cpp
 	"commonfunctions.hpp"
 	"baseobject.hpp"
 	"mainobject.hpp"

@@ -102,23 +102,23 @@ int SDLCommonFunc::ShowMenu(SDL_Renderer* des, TTF_Font* menufont)
     Sint32 mxpos, mypos;
     const int options = 2;
     SDL_Rect pos_arr[options];
-    pos_arr[0].x = 200;
+    pos_arr[0].x = 270;
     pos_arr[0].y = 400;
 
-    pos_arr[1].x = 200;
+    pos_arr[1].x = 270;
     pos_arr[1].y = 450;
 
     Texts options_text[options+1];
 
     options_text[0].SetText("Play");
-    options_text[0].SetColor(Texts::WHITE);
+    options_text[0].SetColor(Texts::BLACK);
     options_text[0].LoadFromRenderedText(menufont,des);
     pos_arr[0].w = options_text[0].GetWidth();
     pos_arr[0].h = options_text[0].GetHeight();
     options_text[0].RenderText(des,pos_arr[0].x,pos_arr[0].y,NULL,NULL,SDL_FLIP_NONE);
 
     options_text[1].SetText("Quit");
-    options_text[1].SetColor(Texts::WHITE);
+    options_text[1].SetColor(Texts::BLACK);
     options_text[1].LoadFromRenderedText(menufont,des);
     pos_arr[1].w = options_text[1].GetWidth();
     pos_arr[1].h = options_text[1].GetHeight();
